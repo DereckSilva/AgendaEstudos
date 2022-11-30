@@ -48,6 +48,8 @@ Para que a agenda de estudos seja visualizado no navegador basta abrir o termina
 
 A aplicação será inicializada na porta que foi definida dentro do projeto no arquivo <em>express.js</em>, parte do desenvolvedor definir uma porta livre localmente.
 
+Para trabalhar com banco de dados foi utilizado o <a href='https://www.mongodb.com/cloud/atlas/register' target="_blank">MondoDB Atlas</a>, uma plataforma que permite o armazenamento de dados em um servidor online da Google.
+
 ### Tecnologias
 <span id="doc"></span>
 <h4>As seguintes ferramentas foram usadas na construção do projeto:</h4>
