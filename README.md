@@ -20,7 +20,7 @@
 
 ### Features
 
-- [ ] Conversor de Moedas
+- [ ] Agenda de Estudos
 
 ### Sobre
 
