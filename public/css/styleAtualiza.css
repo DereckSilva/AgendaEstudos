@@ -1,0 +1,79 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    font-family: 'Rosario';
+}
+
+/*id e classes*/
+#erro{
+    background-color: rgb(248, 152, 152);
+    color: rgb(134, 3, 3);
+    padding: 2px;
+    border-radius: 8px;
+    border: 1px solid rgb(134, 3, 3);
+    width: 450px;
+    margin: 0px auto 2px;
+    display: block;
+    text-align: center;
+}
+
+#sucesso{
+    background-color: rgb(197, 238, 131);
+    color: rgb(57, 112, 5);
+    padding: 2px;
+    border-radius: 8px;
+    border: 1px solid rgb(57, 112, 5);
+    width: 450px;
+    margin: 0px auto 2px;
+    display: block;
+    text-align: center;
+}
+
+input{
+    display: block;
+    border: none;
+    border-bottom: 1px solid blueviolet;
+    padding: 15px;
+    width:309px;
+    border-radius: 10px;
+    margin:22px 0;
+}
+
+form{
+    width: 750px;
+    display: flex;
+    justify-content: space-around;
+    margin: auto;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+}
+main{
+    display: flex;
+    flex-direction: column;
+}
+
+button{
+    width: 150px;
+    border: none;
+    padding: 8px;
+    border-radius: 8px;
+    margin: auto;
+    background-color: blueviolet;
+    color: aliceblue;
+    cursor: pointer;
+}
+
+a{
+    float: right;
+    color:#c9c9c9;
+    text-decoration: none;
+    padding: 10px;
+    border-radius: 15px;
+}
+
+img{
+    margin:auto;
+}

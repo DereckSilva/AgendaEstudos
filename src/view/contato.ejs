@@ -1,0 +1,44 @@
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Mulish&family=Open+Sans:wght@700&family=Rosario&display=swap" rel="stylesheet"> 
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700&family=Poppins&display=swap" rel="stylesheet"> 
+        <link rel="stylesheet" href="https://cdn.es.gov.br/fonts/font-awesome/css/font-awesome.min.css">
+        <link rel="stylesheet" href="/css/styleAtualiza.css">
+        <title><%= title%></title>
+    </head>
+<body>
+<%- include('include/navbar')%>
+<main>
+    <div>
+        <a type="button" href="/">Voltar</a>
+    </div>
+    <img src="/img/Uploading-pana.png" width="220" height="220" 
+    alt="imagem de jovem fazendo carregamento de arquivo/adicionando documentos">
+
+    <%- include('include/message')%>
+    <form id="cadAgen" action="/criaAgenda" method="post">
+        <div>
+            <label for="diaSemana">
+                Dia da Semana 
+            </label>
+            <input type="text" name="diaSemana" id="diaSemana">
+            <label for="conteudo">Conteúdo</label>
+            <input type="text" name="conteudo" id="conteudo">
+        </div>
+        <div>
+            <label for="horaIni">Horário Início</label>
+            <input type="time" name="horaIni" id="horaIni">
+            <label for="horaFim">Horário Fim</label>
+            <input type="time" name="horaFim" id="horaFim">
+        </div>
+    </form>
+    <button form="cadAgen">Salvar</button>
+
+</main>
+</body>
+</html>

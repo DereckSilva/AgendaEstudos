@@ -1,0 +1,46 @@
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Mulish&family=Open+Sans:wght@700&family=Rosario&display=swap" rel="stylesheet"> 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700&family=Poppins&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="https://cdn.es.gov.br/fonts/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/styleLogin.css">
+    <title><%= title%></title>
+</head>
+<body>
+
+    <!--conteúdo principal-->
+    <div id="conteudoPrincipalLogin">
+        <div id="imagemLogin">
+            <img  src="/img/Schedule-amico.png" 
+            alt="Imagem de uma agenda de reunião">
+        </div>
+        <div id="formLogin">
+            <%- include('include/message')%>
+            <h2>Login</h2>
+            <h3>Acesse o sistema para controle das suas reuniões</h3>
+            <section>
+                <form action="/login" method="POST">
+                    <div class="inputData">
+                        <label for="emailCliente">Email</label>
+                        <input type="email" name="emailUser" id="emailCliente">
+                    </div>
+                    <div class="inputData">
+                        <label for="senhaCliente">Senha</label>
+                        <input type="password" name="passwordUser" id="senhaCliente">
+                    </div>
+                    <div class="inputData">
+                        <button id="log">Logar</button>
+                    </div>
+
+                </form>
+                <h3>Ainda não possui cadastro? <a href="/cadastro">Cadastre-se</a></h3>
+            </section>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,84 @@
+
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Mulish&family=Open+Sans:wght@700&family=Rosario&display=swap" rel="stylesheet"> 
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700&family=Epilogue:wght@400;700;800&family=GFS+Didot&display=swap" rel="stylesheet">  
+        <link rel="stylesheet" href="https://cdn.es.gov.br/fonts/font-awesome/css/font-awesome.min.css">
+        <link rel="stylesheet" href="/css/styleHome.css">
+        <title><%= title%></title>
+    </head>
+    <body>
+<% 
+const dias = new Set()
+
+if(diass){
+    for(valor of diass){
+        if(valor != null){
+            dias.add(valor.diaSemana)
+        }
+    }
+}
+%>
+<div id="main">
+
+    <%- include('include/navbar')%>
+
+    <div id="notesGeral">
+        <%if (valores.size > 0){%>
+        <div id="cabecalho">
+            <div>
+                <form action="/filtro" method="GET">
+                    <select name="diaSemana" id="" >
+                        <option value="">     </option>
+                        <% if(dias){
+                        for(valor of dias){%>
+                            <option value="<%=valor%>"><%=valor%></option>
+                        <%}}%>
+                    
+                    </select>
+                    <button> <i class="fa fa-filter"></i> Filtrar</button>
+                </form>
+            </div>
+        </div>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Dia Semana</th>
+                    <th>Hora Início</th>
+                    <th>Hora Fim</th>
+                    <th>Conteúdo</th>
+                    <th>Ação</th>
+                </tr>
+            </thead>
+            <tbody>
+                <%for(valor of valores){%>
+                    <tr class="dia">
+                        <td ><%=valor.diaSemana%></td>
+                        <td><%=valor.horaIni%></td>
+                        <td><%=valor.horaFim%></td>
+                        <td><%=valor.conteudo%></td>
+                        <td> <a href="/atualizar/<%=valor._id%>"><i class="fa fa-rotate-right" title="atualizar"></i></a>
+                            <a href="/remove/<%=valor._id%>"><i class="fa fa-trash" title="remover"></i> </a>
+                        </td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+        <%}else{%>
+            <div id="semReg">
+                <h1>Não há conteúdo cadastro</h1>
+                <h3>Crie a sua agenda de estudos cliquando <a href="/agenda">aqui.</a> </h3>
+            </div>
+        <%}%>
+    </div>
+</div>
+</body>
+</html>

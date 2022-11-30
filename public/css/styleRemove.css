@@ -1,0 +1,94 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    font-family: 'Rosario';
+}
+
+/*id e classes*/
+#erro{
+    background-color: rgb(248, 152, 152);
+    color: rgb(134, 3, 3);
+    padding: 2px;
+    border-radius: 8px;
+    border: 1px solid rgb(134, 3, 3);
+    width: 450px;
+    margin: 5px auto 2px;
+    display: block;
+    text-align: center;
+}
+
+#sucesso{
+    background-color: rgb(197, 238, 131);
+    color: rgb(57, 112, 5);
+    padding: 2px;
+    border-radius: 8px;
+    border: 1px solid rgb(57, 112, 5);
+    width: 450px;
+    margin: 5px auto 2px;
+    display: block;
+    text-align: center;
+}
+
+main{
+    display: flex;
+    flex-direction: column;
+}
+
+form{
+    font-family: 'Didot';
+    width: 350px;
+    height: 230px;
+    font-weight: 900;
+    margin: auto;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    text-align: center;
+    margin: auto;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+
+form a, button{
+    text-decoration: none;
+    background-color: blueviolet;
+    border: none;
+    padding: 8px;
+    border-radius: 8px;
+    text-align: center;
+    color: #FFFFFF;
+    cursor: pointer;
+    font-weight: 400;
+}
+
+img {
+    position:relative;
+    margin: 0 auto 10px;
+    top:50px;
+}
+
+#botoes{
+    margin: 0 auto;
+}
+button{
+    font-size: 16px;
+}
+
+form ul li{
+    list-style: none;
+    color: black;
+    opacity: 0.5;
+}
+form ul{
+    margin: 8px auto 0px;
+    width: 200px;
+    text-align: left;
+    font-weight: 400;
+}
+ul li:nth-child(1){
+    text-transform: capitalize;
+}

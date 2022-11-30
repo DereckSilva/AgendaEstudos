@@ -1,0 +1,31 @@
+header{
+    background-color: blueviolet;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    color: #FFFFFF;
+    float: left;
+    height: 100vh;
+
+}
+
+header a {
+    color: #FFFFFF;
+    text-decoration: none;
+    font-size: 25px;
+}
+
+header div{
+    display: flex;  
+    flex-direction: column;
+}
+header div p {
+    opacity: 0.5;
+}
+
+nav{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}

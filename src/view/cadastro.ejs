@@ -1,0 +1,72 @@
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Mulish&family=Open+Sans:wght@700&family=Rosario&display=swap" rel="stylesheet"> 
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700&family=Poppins&display=swap" rel="stylesheet"> 
+        <link rel="stylesheet" href="https://cdn.es.gov.br/fonts/font-awesome/css/font-awesome.min.css">
+        <link rel="stylesheet" href="/css/styleCad.css">
+        <title><%= title%></title>
+    </head>
+    <body>
+
+   <!--conteúdo principal-->
+    <main id="conteudoPrincipalCad">
+        <div id="cadUser">
+            <img id="imgMuro"  src="/img/Hidden person-pana.png" 
+            alt="png de duas pessoas no mudo">
+
+            <img id="imgMuro2" src="/img/Hidden person-pana.png" 
+            alt="png de duas pessoas no mudo">
+
+            <section id="formPrincipal">
+                <form action="/cadUser" method="POST"  id="formCad">
+                    <fieldset>
+                        <h1>Informações Pessoais</h1>
+                        <%- include('include/message')%>
+                        <div class="inputPai">
+                            <div class="input">
+
+                                <label for="nameUser">Nome <i class="fa fa-user"></i> </label>
+                                <input type="text" name="nameUser" id="nameUser">
+
+                                <label for="passwordUser">Senha <i class="fa fa-lock"></i></label>
+                                <input type="password" name="passwordUser" id="passwordUser" >
+
+                                <label for="passwordUser">Confirmar Senha <i class="fa fa-lock"></i></label>
+                                <input type="password" name="confirmPassword" id="passwordUser" >
+                                
+                            </div>
+                            <div class="input">
+
+                                <label for="emailUser">Email <i class="fa fa-inbox"></i></label>
+                                <input type="email" name="emailUser" id="emailUser" placeholder="example@gmail.com" >
+
+                                <label for="telUser">Telefone <i class="fa fa-phone"></i></label>
+                                <input type="text" name="telUser" id="telUser" placeholder="Ex: (99)99999999" >
+
+                                <label for="cepUser">CEP <i class="fa fa-globe"></i></label>
+                                <input type="text" name="cepUser" id="cepUser" placeholder="99999-999" >
+                            </div>
+                            <div class="input">
+                                <label for="dataNascimento">Data de Nascimento <i class="fa fa-calendar"></i></label>
+                                <input type="date" name="dataNascimento" id="dataNascimento" >
+                    
+                                <label for="demaisInformacoes">Informações Adicionais <i class="fa fa-info"></i></label>
+                                <textarea name="infoAdc" id="demaisInformacoes" rows="10"></textarea>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <div id="rodape">
+                        <button form="formCad" id="saveCad"> Salvar Cadastro</button>
+                        <a type="button" href="/login">Login</a>
+                    </div>
+                </form>
+            </section>
+        </div>
+    </main> 
+    </body>
+</html>
