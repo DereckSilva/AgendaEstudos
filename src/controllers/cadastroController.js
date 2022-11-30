@@ -7,7 +7,7 @@ const cadastro = (req, res) => {
 }
 
 const cadLogin =  async ( req, res) => {
-    const cadastro = await new Cadastro(req.body)
+    const cadastro = new Cadastro(req.body)
     const retorno =  await cadastro.register()// método que será responsável por fazer o registro
     if(cadastro.error.length > 0) {
         req.flash('erro', retorno)
