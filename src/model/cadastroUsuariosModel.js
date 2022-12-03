@@ -25,33 +25,25 @@ class Cadastro {
     }
 
     //responsável por fazer a validação de dados
-    async criaUser(){
-        try{ 
+     criaUser(){
 
-            //formatando alguns dados para remover coisas simples
-            this.body.telUser = await this.body.telUser.replace('(', '')
-            this.body.telUser = await this.body.telUser.replace(')', '')
-            this.body.cepUser = await this.body.cepUser.replace('-', '')
-            //criptografando a senha
-            this.body.passwordUser = bycript.hashSync(this.body.passwordUser, 10)
+        //formatando alguns dados para remover coisas simples
+        this.body.telUser =  this.body.telUser.replace('(', '')
+        this.body.telUser =  this.body.telUser.replace(')', '')
+        this.body.cepUser =  this.body.cepUser.replace('-', '')
+        //criptografando a senha
+        this.body.passwordUser = bycript.hashSync(this.body.passwordUser, 10)
 
-            //fazer método para varias inserções
+        //fazer método para varias inserções
 
-            const user = CadModel.insertMany([this.body])
+        const user = CadModel.insertMany([this.body])
 
-            return user
-        }catch(err){
-            console.log(err)
-        }
+        return user
     }
 
-    async buscaUser(){
-        try{
-            const user = await CadModel.findOne({_id: this.body})
-            return user
-        }catch(err){
-            console.log('Erro: '+err)
-        }
+    buscaUser(){
+        const user = CadModel.findOne({_id: this.body})
+        return user
     }
 }
 

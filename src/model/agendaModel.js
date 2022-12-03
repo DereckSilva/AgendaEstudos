@@ -10,97 +10,65 @@ class Agenda {
 };
 
   /*busca registros cadastrados*/
-  async buscaFilter() {
-    try{
-
+   buscaFilter() {
       let agenda 
       if(this.body){
-        agenda = await AgendaModel.find({id_user: this.user, diaSemana: this.body});
+        agenda = AgendaModel.find({id_user: this.user, diaSemana: this.body});
       }else{
-        agenda = await AgendaModel.find({id_user: this.user});
+        agenda = AgendaModel.find({id_user: this.user});
       }
   
       return agenda;
-    }catch(err){
-      console.log('Erro: '+err)
-    }
 };
 
-  async buscaAll(){
-    try{
-
-      const agenda = await AgendaModel.find({id_user: this.user});
+ buscaAll(){
+      const agenda =  AgendaModel.find({id_user: this.user});
   
       return agenda;
-    }catch(err){
-      console.log('Erro: '+err)
-    }
 }
 
   /*atualiza os dados da agenda*/
-  async atualizaAgend(){
-    try{
+ atualizaAgend(){
 
-      const agenda = await AgendaModel.find({_id: this.body});
-  
-      return agenda
-    }catch(err){
-      console.log('Erro: '+err)
-    }
+    const agenda = AgendaModel.find({_id: this.body});
+
+    return agenda
   }
 
-  async atualizar(){
-    try{
+ atualizar(){
+    
+    const agendaAtualizada = AgendaModel.findOneAndUpdate(
+      {_id: this.body.idUser},//busca por esse objeto
+      //atualiza o conjunto de valores abaixo
+      {diaSemana: this.body.diaSemana,
+        horaIni: this.body.horaIni, 
+        horaFim: this.body.horaFim, 
+        conteudo: this.body.conteudo
+      })
 
-      const agendaAtualizada = await AgendaModel.findOneAndUpdate(
-        {_id: this.body.idUser},//busca por esse objeto
-        //atualiza o conjunto de valores abaixo
-        {diaSemana: this.body.diaSemana,
-          horaIni: this.body.horaIni, 
-          horaFim: this.body.horaFim, 
-          conteudo: this.body.conteudo
-        })
-  
-        return agendaAtualizada
-    }catch(err){
-      console.log('Erro: '+err)
-    }
+      return agendaAtualizada
   }
 
   
 /*cadastra novos registros no banco */
-  async registerAgenda() {
-    try{
+  registerAgenda() {
 
-      const result = await this.cadAgenda();
-  
-      return result;
-    }catch(err){
-      console.log('Erro: '+err)
-    }
+    const result = this.cadAgenda();
+
+    return result;
 };
 
-  async cadAgenda() {
-    try{
-      this.body.id_user = this.user;
-      const registro = await AgendaModel.insertMany([this.body]);
-      return registro;
-    }catch(err){
-      console.log('Erro: '+err)
-    }
-
-
+  cadAgenda() {
+    this.body.id_user = this.user;
+    const registro = AgendaModel.insertMany([this.body]);
+    return registro;
 };
 
 /*remove cadastro do banco de dados */
-  async removeCad(){
-    try{
-      const registro = await AgendaModel.findOneAndDelete({_id: this.body})
-  
-      return registro
-    }catch(err){
-      console.log('Erro: '+err)
-    }
+  removeCad(){
+    const registro = AgendaModel.findOneAndDelete({_id: this.body})
+
+    return registro
   }
 
 };

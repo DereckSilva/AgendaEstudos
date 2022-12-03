@@ -31,7 +31,7 @@ router.get('/filtro', acesso, homeController.filtro)
 
 //Rota de atualizar a agenda
 router.get('/atualizar/:id?', acesso, agendaController.atualiza)
-router.put('/atualizaAgend/:id?', middleware.agenda, middleware.agendaError, agendaController.returnAgendaAt)
+router.put('/atualizaAgend/:id?', agendaController.returnAgendaAt)
 
 //rota para excluir a agenda
 router.get('/remove/:id?', acesso, agendaController.remove)

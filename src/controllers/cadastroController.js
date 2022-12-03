@@ -7,18 +7,26 @@ const cadastro = (req, res) => {
 }
 
 const cadLogin =  async ( req, res) => {
-    const cadastro = new Cadastro(req.body)
-    const retorno =  await cadastro.register()// método que será responsável por fazer o registro
-    if(cadastro.error.length > 0) {
-        req.flash('erro', retorno)
-    }else{
-        req.flash('sucesso', 'Usuário criado com sucesso')
+    try{
+        const cadastro = new Cadastro(req.body)
+        const retorno =  await cadastro.register()// método que será responsável por fazer o registro
+        if(cadastro.error.length > 0) {
+            req.flash('erro', retorno)
+        }else{
+            req.flash('sucesso', 'Usuário criado com sucesso')
+        }
+        await res.redirect('/cadastro')
+    }catch(err){
+        res.status(500).send({message: err.message})
     }
-    await res.redirect('/cadastro')
 }  
 
 const login = async (req, res) => {
-    res.render('login', {erro: res.locals.erro, sucesso: res.locals.sucesso,title: 'Login'})
+    try{
+        res.render('login', {erro: res.locals.erro, sucesso: res.locals.sucesso,title: 'Login'})
+    }catch(err){
+        res.status(500).send({message: err.message})
+    }
 }
 
 module.exports = {
