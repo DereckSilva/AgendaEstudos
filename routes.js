@@ -22,16 +22,16 @@ router.post('/login', passport.authenticate('local', {
 router.get('/logout', homeController.logout)
 
 //Rota da page do usuário
-router.get('/', acesso,homeController.homeUser);
+router.get('/', acesso, homeController.homeUser);
 
 //Rota para criar agenda
 router.get('/agenda', acesso, agendaController.agenda)
-router.post('/criaAgenda', middleware.agenda, middleware.agendaError, agendaController.criaAgenda)
+router.post('/criaAgenda', middleware.agendaEmail, middleware.agenda, middleware.agendaError, agendaController.criaAgenda)
 router.get('/filtro', acesso, homeController.filtro)
 
 //Rota de atualizar a agenda
 router.get('/atualizar/:id?', acesso, agendaController.atualiza)
-router.put('/atualizaAgend/:id?', agendaController.returnAgendaAt)
+router.put('/atualizaAgend/:id?', middleware.agenda, middleware.agendaError, agendaController.returnAgendaAt)
 
 //rota para excluir a agenda
 router.get('/remove/:id?', acesso, agendaController.remove)

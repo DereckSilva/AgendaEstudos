@@ -65,8 +65,7 @@ const validator = (req, res, next) => {
     next() 
 }
 
-/*validação de criação de agenda */
-const agenda = [
+const agendaEmail = [
     check("diaSemana")
     .custom((diaSemana, {req}) => {
         return new Promise((res, rej) =>{
@@ -81,7 +80,10 @@ const agenda = [
             })
         })
     })
-    ,
+]
+
+/*validação de criação de agenda */
+const agenda = [
     check('diaSemana')
         .custom(diaSemana => {
             //verificando se o dia da semana é válido
@@ -125,6 +127,7 @@ module.exports = {
     middleware,
     schemaRegister,
     validator,
+    agendaEmail,
     agenda,
     agendaError
 }

@@ -23,9 +23,8 @@ const criaAgenda = async (req, res) => {
 const atualiza = async (req, res) => {
   try{
     const agenda = new Agenda(req.session.passport.user, req.params.id)
-    const result = agenda.atualizaAgend()
-    result.then(data => {
-      data = data[0]
+    const result = await agenda.atualizaAgend()
+    data = result[0]
       res.render('atualiza', 
       {
         erro: req.flash('erro'),
@@ -37,7 +36,6 @@ const atualiza = async (req, res) => {
         horaFim: data.horaFim,
         conteudo: data.conteudo
       })
-    })
   }catch(err){
     res.status(500).send({message: err.message})
   }

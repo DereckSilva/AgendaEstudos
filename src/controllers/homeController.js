@@ -1,21 +1,20 @@
 const { Agenda } = require('../model/agendaModel')
 const { Cadastro } = require('../model/cadastroUsuariosModel')
 
-const homeUser = (req, res) => {
+const homeUser = async (req, res) => {
     const agenda = new Agenda(req.session.passport.user, req.body);
     const cadastro = new Cadastro(req.session.passport.user)
-    const dias = agenda.buscaAll()
-    const user = cadastro.buscaUser()
-    dias.then(diasSemana => {
-        const diasOrg = new Set()
-        ajusta(diasSemana, diasOrg)
-        const valoresAle = new Set()
-        user.then(nameUser => {
-            if(req.session.valoresAle != undefined) ajusta(req.session.valoresAle, valoresAle)
-            data = req.session.valoresAle != undefined ? valoresAle : diasOrg
-            res.render('home', {title: 'Home', valores: data, diass: diasOrg, user: nameUser});
-        })
-    })
+    const dias = await agenda.buscaAll()
+    const user = await cadastro.buscaUser()
+
+    /*organizando informações */
+    const diasOrg = new Set()
+    ajusta(dias, diasOrg)
+    const valoresAle = new Set()
+    if(req.session.valoresAle != undefined) ajusta(req.session.valoresAle, valoresAle)
+    data = req.session.valoresAle != undefined ? valoresAle : diasOrg
+
+    res.render('home', {title: 'Home', valores: data, diass: diasOrg, user: user});
 }
 
 const ajusta = (oldArray, newArray) => {
@@ -32,14 +31,13 @@ const ajustaArray = (newArray, oldArray, descSem) =>{
     })
 }
 
-const filtro = (req, res) => {
+const filtro = async (req, res) => {
 
     const agenda = new Agenda(req.session.passport.user, req.query['diaSemana']);
-    const dias = agenda.buscaFilter()
-    dias.then(diasSemana =>{
-        req.session.valoresAle = diasSemana
-        res.redirect('back');
-    })
+    const dias =  await agenda.buscaFilter()
+    req.session.valoresAle = dias
+    console.log(req.session.valoresAle)
+    res.redirect('back')
 }
 
 const logout = (req, res) => {
