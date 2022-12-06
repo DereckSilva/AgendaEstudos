@@ -1,8 +1,4 @@
-const mongoose = require('mongoose')
-const bycript = require('bcryptjs')
-const { CadSchema } = require('../db/schemaCad')
-
-const CadModel = mongoose.model('Cadastro', CadSchema)
+const { CadModel } = require('../db/schemaCad')
 
 class Cadastro {
 
@@ -31,12 +27,8 @@ class Cadastro {
         this.body.telUser =  this.body.telUser.replace('(', '')
         this.body.telUser =  this.body.telUser.replace(')', '')
         this.body.cepUser =  this.body.cepUser.replace('-', '')
-        //criptografando a senha
-        this.body.passwordUser = bycript.hashSync(this.body.passwordUser, 10)
 
-        //fazer método para varias inserções
-
-        const user = CadModel.insertMany([this.body])
+        const user = CadModel.create(this.body)
 
         return user
     }
@@ -48,6 +40,5 @@ class Cadastro {
 }
 
 module.exports = {
-    Cadastro,
-    CadModel
+    Cadastro
 }
