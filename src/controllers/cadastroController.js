@@ -1,12 +1,12 @@
-const { Cadastro } = require('../model/cadastroUsuariosModel')
+import { Cadastro } from '../model/cadastroUsuariosModel.js'
 
-const cadastro = (req, res) => {
+export const cadastro = (req, res) => {
 
     res.render('cadastro', {erro: req.flash('erro'), sucesso: req.flash('sucesso'),
     title: 'Cadastro'})
 }
 
-const cadLogin =  async ( req, res) => {
+export const cadLogin =  async ( req, res) => {
     try{
         const cadastro = new Cadastro(req.body)
         const retorno =  await cadastro.register()// método que será responsável por fazer o registro
@@ -21,16 +21,10 @@ const cadLogin =  async ( req, res) => {
     }
 }  
 
-const login = async (req, res) => {
+export const login = async (req, res) => {
     try{
         res.render('login', {erro: res.locals.erro, sucesso: res.locals.sucesso,title: 'Login'})
     }catch(err){
         res.status(500).send({message: err.message})
     }
-}
-
-module.exports = {
-    cadastro,
-    cadLogin,
-    login
 }

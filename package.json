@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "express.js",
+  "type": "module",
   "scripts": {
     "start": "nodemon express.js"
   },

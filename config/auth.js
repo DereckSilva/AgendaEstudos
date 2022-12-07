@@ -1,17 +1,18 @@
-const LocalStrategy = require('passport-local').Strategy
-const bycript = require('bcryptjs')
-const { CadModel } = require('../src/model/cadastroUsuariosModel')
+import passportLocal from 'passport-local'
+import bycript from 'bcryptjs'
+import { CadModel } from '../src/db/schemaCad.js'
 
-module.exports = function(passport){
+const LocalStrategy = passportLocal.Strategy
+
+function passportA(passport){
 
     passport.use(new LocalStrategy({usernameField: 'emailUser', passwordField: 'passwordUser'}, 
     (email, senha, done)=>{
         //buscando o dado dentro do banco com base no que foi digitado pelo usuário
-        CadModel.findOne({emailUser: email}).then(usuario => {
+        CadModel.findOne({emailUser: email}).select("+passwordUser").then(usuario => {
             if(!usuario) {
                 return done(null, false, {message: 'E-mail incorreto'})
             }
-
             //comparação de senha
             bycript.compare(senha, usuario.passwordUser, (err, bate) =>{
                 if(bate){
@@ -35,3 +36,5 @@ module.exports = function(passport){
         })
     })
 }
+
+export default passportA

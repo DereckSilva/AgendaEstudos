@@ -1,10 +1,10 @@
-const mongoose = require('mongoose')
-const bcrypt = require('bcryptjs')
+import mongoose from 'mongoose'
+import bcrypt from 'bcryptjs'
 
 //criação de schema para o cadastro de usuários
-const CadSchema = new mongoose.Schema({
+export const CadSchema = new mongoose.Schema({
     nameUser: {type: String, required: true,  unique: false},
-    passwordUser: {type: String, required: true,  unique: false},
+    passwordUser: {type: String, required: true,  unique: false, select: false},
     emailUser: {type: String, required: true,  unique: false},
     telUser: {type: String, required: true,  unique: false},
     cepUser: {type: String, required:true,  unique: false},
@@ -17,8 +17,4 @@ CadSchema.pre("save", function (next){
     next()
 })
 
-const CadModel = mongoose.model('Cadastro', CadSchema)
-
-module.exports = {
-    CadModel
-}
+export const CadModel = mongoose.model('Cadastro', CadSchema)

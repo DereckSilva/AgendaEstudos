@@ -1,6 +1,6 @@
-const { Agenda } = require('../model/agendaModel');
+import { Agenda } from '../model/agendaModel.js'
 
-const agenda = (req, res) => {
+export const agenda = (req, res) => {
   res.render('contato', {
     erro: req.flash('erro'),
     sucesso: req.flash('sucesso'),
@@ -8,7 +8,7 @@ const agenda = (req, res) => {
   })
 };
 
-const criaAgenda = async (req, res) => {
+export const criaAgenda = async (req, res) => {
   try{
     const cadastro = new Agenda(req.session.passport.user,req.body)
     await cadastro.registerAgenda()
@@ -20,11 +20,11 @@ const criaAgenda = async (req, res) => {
   }
 };
 
-const atualiza = async (req, res) => {
+export const atualiza = async (req, res) => {
   try{
     const agenda = new Agenda(req.session.passport.user, req.params.id)
     const result = await agenda.atualizaAgend()
-    data = result[0]
+    let data = result[0]
       res.render('atualiza', 
       {
         erro: req.flash('erro'),
@@ -41,7 +41,7 @@ const atualiza = async (req, res) => {
   }
 }
 
-const returnAgendaAt = async(req, res) => {
+export const returnAgendaAt = async(req, res) => {
   try{
     req.body.idUser = req.params.id
     const agenda = new Agenda(req.session.passport.user, req.body)
@@ -54,7 +54,7 @@ const returnAgendaAt = async(req, res) => {
   }
 }
 
-const remove = async(req, res) => {
+export const remove = async(req, res) => {
   try{
     const agenda = new Agenda(req.session.passport.user, req.params.id)
     let result = await agenda.atualizaAgend()
@@ -73,7 +73,7 @@ const remove = async(req, res) => {
   }
 }
 
-const removeCad = async(req, res) => {
+export const removeCad = async(req, res) => {
   try{
     const agenda = new Agenda(req.session.passport.user, req.params.id)
     await agenda.removeCad()
@@ -83,13 +83,3 @@ const removeCad = async(req, res) => {
     res.status(500).send({message: err.message})
 }
 }
-
-
-module.exports = {
-  agenda,
-  criaAgenda,
-  atualiza,
-  returnAgendaAt,
-  remove,
-  removeCad
-};

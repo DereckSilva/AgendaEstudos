@@ -1,9 +1,9 @@
-const { check, validationResult } = require('express-validator');
-const { CadModel } = require('../model/cadastroUsuariosModel')
-const { AgendaModel } = require('../model/agendaModel')
+import { check, validationResult } from 'express-validator'
+import { CadModel } from '../db/schemaCad.js';
+import { AgendaModel } from '../model/agendaModel.js'
 
 /*validação do cadastro */
-const schemaRegister = [
+export const schemaRegister = [
     check("emailUser")
     .custom((email) => {
         //retorna promise, dentro dela fazemos a verificasção do email
@@ -54,7 +54,7 @@ const schemaRegister = [
     ]
 
 
-const validator = (req, res, next) => {
+export const validator = (req, res, next) => {
     const errors = validationResult(req);
     console.log(errors.array())
     if (!errors.isEmpty()) {
@@ -65,7 +65,7 @@ const validator = (req, res, next) => {
     next() 
 }
 
-const agendaEmail = [
+export const agendaEmail = [
     check("diaSemana")
     .custom((diaSemana, {req}) => {
         return new Promise((res, rej) =>{
@@ -83,7 +83,7 @@ const agendaEmail = [
 ]
 
 /*validação de criação de agenda */
-const agenda = [
+export const agendaV = [
     check('diaSemana')
         .custom(diaSemana => {
             //verificando se o dia da semana é válido
@@ -107,7 +107,7 @@ const agenda = [
         .withMessage("O seu conteúdo deve ser menor que 25 caracteres")
 ]
 
-const agendaError = (req, res, next) =>{
+export const agendaError = (req, res, next) =>{
     const error = validationResult(req)
     if(!error.isEmpty()){
         const [{msg}] = error.array()
@@ -117,17 +117,8 @@ const agendaError = (req, res, next) =>{
     next()
 }
 
-const middleware = (req, res, next)=>{
+export const middleware = (req, res, next)=>{
     res.locals.erro = req.flash('error')
     res.locals.user = req.user || null
     next()
-}
-
-module.exports = {
-    middleware,
-    schemaRegister,
-    validator,
-    agendaEmail,
-    agenda,
-    agendaError
 }

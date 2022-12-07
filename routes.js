@@ -1,17 +1,18 @@
-const router = require('express').Router()
-const cadastroController = require('./src/controllers/cadastroController')
-const middleware = require('./src/middlewares/mainMiddlewares')
-const homeController = require('./src/controllers/homeController')
-const agendaController = require('./src/controllers/agendaController')
-const passport = require('passport')
-const {acesso} = require('./helpers/acesso') //helper para verificar se o usuário está autenticado   
+import express from 'express'
+import {login, cadLogin, cadastro} from './src/controllers/cadastroController.js'
+import {schemaRegister, validator, agendaV, agendaEmail, agendaError} from './src/middlewares/mainMiddlewares.js'
+import {homeUser, logout, filtro} from './src/controllers/homeController.js'
+import {agenda, criaAgenda, atualiza, returnAgendaAt, remove, removeCad} from './src/controllers/agendaController.js'
+import passport from 'passport'
+import acesso from './helpers/acesso.js' //helper para verificar se o usuário está autenticado   
 
+export const router = express.Router()
 //Rotas de Cadastro
-router.get('/cadastro' ,cadastroController.cadastro)
-router.post('/cadUser', middleware.schemaRegister, middleware.validator,cadastroController.cadLogin)
+router.get('/cadastro' ,cadastro)
+router.post('/cadUser', schemaRegister, validator,cadLogin)
 
 //Rotas de Login
-router.get('/login', cadastroController.login)
+router.get('/login', login)
 router.post('/login', passport.authenticate('local', {
     successRedirect: '/',
     failureRedirect: '/login',
@@ -19,24 +20,20 @@ router.post('/login', passport.authenticate('local', {
 }))
 
 //Rota de logout
-router.get('/logout', homeController.logout)
+router.get('/logout', logout)
 
 //Rota da page do usuário
-router.get('/', acesso, homeController.homeUser);
+router.get('/', acesso.acesso, homeUser);
 
 //Rota para criar agenda
-router.get('/agenda', acesso, agendaController.agenda)
-router.post('/criaAgenda', middleware.agendaEmail, middleware.agenda, middleware.agendaError, agendaController.criaAgenda)
-router.get('/filtro', acesso, homeController.filtro)
+router.get('/agenda', acesso.acesso, agenda)
+router.post('/criaAgenda', agendaEmail, agendaV, agendaError, criaAgenda)
+router.get('/filtro', acesso.acesso, filtro)
 
 //Rota de atualizar a agenda
-router.get('/atualizar/:id?', acesso, agendaController.atualiza)
-router.put('/atualizaAgend/:id?', middleware.agenda, middleware.agendaError, agendaController.returnAgendaAt)
+router.get('/atualizar/:id?', acesso.acesso, atualiza)
+router.put('/atualizaAgend/:id?', agendaV, agendaError, returnAgendaAt)
 
 //rota para excluir a agenda
-router.get('/remove/:id?', acesso, agendaController.remove)
-router.delete('/remover/:id?', agendaController.removeCad)
-
-module.exports = {
-    router
-}
+router.get('/remove/:id?', acesso.acesso, remove)
+router.delete('/remover/:id?', removeCad)

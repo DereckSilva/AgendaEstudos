@@ -1,6 +1,6 @@
-const { CadModel } = require('../db/schemaCad')
+import { CadModel } from '../db/schemaCad.js'
 
-class Cadastro {
+export class Cadastro {
 
     constructor(body) {
         this.body = body,
@@ -37,8 +37,4 @@ class Cadastro {
         const user = CadModel.findOne({_id: this.body})
         return user
     }
-}
-
-module.exports = {
-    Cadastro
 }

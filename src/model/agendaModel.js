@@ -1,9 +1,9 @@
-const mongoose = require('mongoose')
-const { AgendaSchema } = require('../db/agendaSchema')
+import mongoose from 'mongoose';
+import { AgendaSchema } from '../db/agendaSchema.js';
 
-const AgendaModel = mongoose.model('Agenda', AgendaSchema)
+export const AgendaModel = mongoose.model('Agenda', AgendaSchema)
 
-class Agenda {
+export class Agenda {
   constructor(user,body) {
     this.body = body;
     this.user = user
@@ -60,7 +60,7 @@ class Agenda {
 
   cadAgenda() {
     this.body.id_user = this.user;
-    const registro = AgendaModel.insertMany([this.body]);
+    const registro = AgendaModel.create(this.body);
     return registro;
 };
 
@@ -71,9 +71,4 @@ class Agenda {
     return registro
   }
 
-};
-
-module.exports = {
-  Agenda,
-  AgendaModel
 };
