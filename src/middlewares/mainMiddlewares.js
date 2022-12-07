@@ -56,7 +56,6 @@ export const schemaRegister = [
 
 export const validator = (req, res, next) => {
     const errors = validationResult(req);
-    console.log(errors.array())
     if (!errors.isEmpty()) {
         const [{msg}] = errors.array()
         req.flash('erro', msg) // enviando mensagem de erro
