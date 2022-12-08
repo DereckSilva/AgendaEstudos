@@ -68,8 +68,8 @@ export const agendaEmail = [
     check("diaSemana")
     .custom((diaSemana, {req}) => {
         return new Promise((res, rej) =>{
-            AgendaModel.findOne({diaSemana: diaSemana, horaIni: req.body.horaIni, 
-                horaFim: req.body.horaFim}).then(user => {
+            AgendaModel.find({id_user: req.session.passport.user }).then(user => {
+                user = user[0]
                 if(user != null && user.horaIni == req.body.horaIni && user.diaSemana == req.body.diaSemana 
                     && user.horaFim == req.body.horaFim){
                     rej(new Error("Dados já cadastrados"))
