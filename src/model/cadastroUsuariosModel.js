@@ -1,5 +1,10 @@
 import { CadModel } from '../db/schemaCad.js'
 
+export const buscaUser = (id) =>{
+    const user = CadModel.findOne({_id: id})
+    return user
+}
+
 export class Cadastro {
 
     constructor(body) {

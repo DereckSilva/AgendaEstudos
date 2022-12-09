@@ -1,18 +1,20 @@
 import express from  'express'
 import session from 'express-session'
-const app = express()
-const port = 3333
 import mongoose from 'mongoose'
-import {router} from './routes.js'
+import {userRouter} from './src/routes/user.routes.js'
+import { agendaRouter } from './src/routes/agenda.routes.js'
 import flash  from 'connect-flash'
 import {middleware} from './src/middlewares/mainMiddlewares.js'
 import passport from 'passport'
 import dotenv from 'dotenv'
-dotenv.config()
 import passportA from "./config/auth.js"
 import methodOverride from 'method-override'
 
+const app = express()
+const port = 3333
+dotenv.config()
 passportA(passport)
+
 async function conexao(){
     mongoose.connect(process.env.DB_CONNECTION,{useNewUrlParser: true, useUnifiedTopology:true})
     console.log('Conectou com a base de dados!')
@@ -40,7 +42,9 @@ app.use(passport.session())
 
 app.use(flash())
 app.use(middleware)
-app.use(router)
+app.use(userRouter)
+app.use(agendaRouter)
+app.use(express.json())
 
 conexao()
 app.listen(port, ()=>{

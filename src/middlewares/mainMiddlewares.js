@@ -20,14 +20,14 @@ export const schemaRegister = [
         })
     }),
     check("nameUser")
-            .isLength({ min: 10})
-            .withMessage("Insira o seu nome completo"),
+        .isLength({ min: 10})
+        .withMessage("Insira o seu nome completo"),
     check("passwordUser")
-            .trim()
-            .matches(/[A-Z0-9a-z]/gi)
-            .withMessage("A senha precisa ter letras maiúsculas, minúsculas e números.")
-            .isLength({min:8})
-            .withMessage('Sua senha precisa conter mais do que 8 caracteres.'),
+        .trim()
+        .matches(/[A-Z0-9a-z]/gi)
+        .withMessage("A senha precisa ter letras maiúsculas, minúsculas e números.")
+        .isLength({min:8})
+        .withMessage('Sua senha precisa conter mais do que 8 caracteres.'),
     check("confirmPassword")
     //customização para comparar os valores das senhas
     .custom((value, {req}) => {
@@ -38,19 +38,19 @@ export const schemaRegister = [
         return true
     }),
     check("emailUser")
-            .exists()
-            .isEmail()
-            .withMessage("O e-mail inserido não é válido"),
+        .exists()
+        .isEmail()
+        .withMessage("O e-mail inserido não é válido"),
     
     check("telUser")    
-           .matches(/\(\d{2}\)\d{9}/g)
-           .withMessage("Número de Telefone inválido"),
+        .matches(/\(\d{2}\)\d{9}/g)
+        .withMessage("Número de Telefone inválido"),
     check('cepUser')
-           .matches(/\d{5}-\d{3}/g)
-           .withMessage('CEP inválido'),
+        .matches(/\d{5}-\d{3}/g)
+        .withMessage('CEP inválido'),
     check("dataNascimento")
-           .isDate()
-           .withMessage("Data de Nascimento Inválida")
+        .isDate()
+        .withMessage("Data de Nascimento Inválida")
     ]
 
 
@@ -66,15 +66,15 @@ export const validator = (req, res, next) => {
 
 export const agendaEmail = [
     check("diaSemana")
-    .custom((diaSemana, {req}) => {
+    .custom(({req}) => {
         return new Promise((res, rej) =>{
-            AgendaModel.find({id_user: req.session.passport.user }).then(user => {
-                user = user[0]
+            AgendaModel.find({id_user: req.session.passport.user }).then(userR => {
+                let [user] = userR
                 if(user != null && user.horaIni == req.body.horaIni && user.diaSemana == req.body.diaSemana 
                     && user.horaFim == req.body.horaFim){
                     rej(new Error("Dados já cadastrados"))
                 }else{
-                    res()
+                    res(user)
                 }
             })
         })

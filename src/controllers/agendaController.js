@@ -24,7 +24,7 @@ export const atualiza = async (req, res) => {
   try{
     const agenda = new Agenda(req.session.passport.user, req.params.id)
     const result = await agenda.atualizaAgend()
-    let data = result[0]
+    let [data] = result
       res.render('atualiza', 
       {
         erro: req.flash('erro'),
@@ -58,15 +58,15 @@ export const remove = async(req, res) => {
   try{
     const agenda = new Agenda(req.session.passport.user, req.params.id)
     let result = await agenda.atualizaAgend()
-    result = result[0];
+    let [data] = result;
       res.render('remove', 
       {
         title: 'Remove',
         id: req.params.id,
-        diaSemana: result.diaSemana,
-        horaIni: result.horaIni,
-        horaFim: result.horaFim,
-        conteudo: result.conteudo 
+        diaSemana: data.diaSemana,
+        horaIni: data.horaIni,
+        horaFim: data.horaFim,
+        conteudo: data.conteudo 
       })
   }catch(err){
     res.status(500).send({message: err.message})

@@ -21,10 +21,7 @@ export const cadLogin =  async ( req, res) => {
     }
 }  
 
-export const login = async (req, res) => {
-    try{
-        res.render('login', {erro: res.locals.erro, sucesso: res.locals.sucesso,title: 'Login'})
-    }catch(err){
-        res.status(500).send({message: err.message})
-    }
+export const login = (req, res) => {
+    res.render('login', {erro: res.locals.erro, sucesso: res.locals.sucesso,title: 'Login'})
+
 }

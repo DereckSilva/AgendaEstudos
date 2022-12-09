@@ -3,29 +3,36 @@ import { AgendaSchema } from '../db/agendaSchema.js';
 
 export const AgendaModel = mongoose.model('Agenda', AgendaSchema)
 
+
+/*busca registros cadastrados*/
+export const buscaFilter = (user, body)=>{
+  let agenda
+  if(body){
+    agenda = AgendaModel.find({id_user: user, diaSemana: body});
+  }else{
+    agenda = AgendaModel.find({id_user: user});
+  }
+
+  return agenda
+}
+
+export const buscaAll = (user)=>{
+  const agenda =  AgendaModel.find({id_user: user});
+  
+  return agenda;
+}
+
+export const cadAgenda = (body, user) =>{
+  body.id_user = user;
+    const registro = AgendaModel.create(body);
+    return registro;
+}
+
 export class Agenda {
   constructor(user,body) {
     this.body = body;
     this.user = user
 };
-
-  /*busca registros cadastrados*/
-   buscaFilter() {
-      let agenda 
-      if(this.body){
-        agenda = AgendaModel.find({id_user: this.user, diaSemana: this.body});
-      }else{
-        agenda = AgendaModel.find({id_user: this.user});
-      }
-  
-      return agenda;
-};
-
- buscaAll(){
-      const agenda =  AgendaModel.find({id_user: this.user});
-  
-      return agenda;
-}
 
   /*atualiza os dados da agenda*/
  atualizaAgend(){
@@ -48,15 +55,6 @@ export class Agenda {
 
       return agendaAtualizada
   }
-
-  
-/*cadastra novos registros no banco */
-  registerAgenda() {
-
-    const result = this.cadAgenda();
-
-    return result;
-};
 
   cadAgenda() {
     this.body.id_user = this.user;
