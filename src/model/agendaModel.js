@@ -28,6 +28,21 @@ export const cadAgenda = (body, user) =>{
     return registro;
 }
 
+export const paginationBd = (limit, offset) => {
+
+  const users = AgendaModel.find()
+                            .sort({_id: -1})
+                            .skip(offset) 
+                            .limit(limit)
+                            
+  return users
+}
+
+export const count = () => {
+  const countInfo = AgendaModel.countDocuments()
+  return  countInfo
+}
+
 export class Agenda {
   constructor(user,body) {
     this.body = body;

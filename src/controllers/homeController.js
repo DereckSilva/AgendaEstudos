@@ -1,9 +1,34 @@
 
-import { buscaFilter, buscaAll } from  '../model/agendaModel.js'
+import { buscaFilter, buscaAll, paginationBd, count } from  '../model/agendaModel.js'
 import { buscaUser } from '../model/cadastroUsuariosModel.js'
 
 export const homeUser = async (req, res) => {
     try{
+        let { limit, offset } = req.query
+        const currentUrl = req.baseUrl != '' ? req.baseUrl : '/'
+        
+        limit = Number(limit)
+        offset = Number(offset)
+        
+        if(!limit) limit = 5
+        if(!offset) offset = 0
+        
+        const users = await paginationBd(limit, offset)
+        const countInfo = await count()
+        //console.log(countInfo)
+        const next = offset + limit
+        const nextUrl = next < countInfo ? `${currentUrl}?limit=${limit}&offset=${next}` : null
+
+        const previous = offset - limit < 0 ? null : offset - limit
+        const previousUrl = previous != null ? `${currentUrl}?limit=${limit}&offset=${previous}` : null
+
+        console.log({
+            nextUrl: nextUrl,
+            previousUrl: previousUrl,
+            countInfo: countInfo,
+            users
+        })
+
         const dias = await buscaAll(req.session.passport.user)
         const user = await buscaUser(req.session.passport.user)
     
